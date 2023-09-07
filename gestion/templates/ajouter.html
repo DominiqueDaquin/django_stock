@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter item</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            flex-direction: column;
+        }
+        form{
+            width: 500px;
+            border: 1px solid white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            
+            padding:15px ;
+        }
+        p{
+            
+            text-overflow: ellipsis;
+        }
+       a{
+        text-decoration: none;
+        color: aqua;
+        font-family: 'Courier New', Courier, monospace;
+       }
+        input[type='submit']{
+            background: white;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            color: black;
+            border: none;
+            font-weight: bold;
+            cursor: grab;
+        }
+    </style>
+
+</head>
+<body>
+    {% if sauvegarde %}
+
+<div class="success">
+    Article ajouter avec Success!
+</div>
+
+{% endif %}
+
+<form enctype="multipart/form-data" method="post">
+
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" value="ajouter">
+</form>
+</body>
+</html>

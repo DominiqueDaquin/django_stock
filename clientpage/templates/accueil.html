@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceuil</title>
+
+    <style>
+        *{
+            margin: 0;
+        }
+        
+        body{
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background: black;
+            color: white;
+            overflow-x: hidden;
+            
+        }
+        .items{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+            row-gap: 50px;
+            width: 70vw;
+            
+            
+            justify-content: center;
+            
+            
+        }
+        .item{
+            width: 300px;
+            height:300px;
+
+        }
+        .bas{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+
+        }
+        .info{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            
+        }
+        .ajouter_pannier{
+            border: 1px solid white;
+            padding: 10px 5px;
+            color: black;
+            background: white;
+        }
+        .nav{
+            margin-top: 20px;
+            display: flex;
+            gap: 30px;
+            transition: all 1s;
+        }
+        .nav a:hover{
+            color: aquamarine;
+        }
+        .nav a div{
+            height: 2px;
+            width: 0%;
+            background:#fff;
+        }
+        
+        .nav a:hover div{
+            
+            width: 100%;
+            
+        }
+    </style>
+
+</head>
+<body>
+   
+
+    {% block navigation %}
+    <div class="nav">
+     <a href="#">Produits <div></div> </a>
+     <a href="{% url 'clientpage:pannier' %}">Pannier<div></div></a>
+     <a href="#">Faq<div></div></a>
+     </div>
+    {% endblock navigation %}
+      
+    <div class="banniere">
+        <h1>Bienvenu sur Mangathèque</h1>
+    </div>
+    <div class="items">
+
+
+        {% for article in articles  %}
+            <div class="item">
+            <div class="img">
+                <img src={{article.photo.name}}  alt={{article.nom}} class='item' >
+            </div>
+
+            <div class="bas">
+                <div class="info">
+                    <p> {{article.nom}} </p>
+                    <p class="prix">{{article.prix}} fcfa </p>
+                    <p>Quantite: {{article.quantite}} </p>
+                    
+                </div>
+                <div class="button">
+                    <a href="{% url 'clientpage:ajouter_pannier' article.id %}" class="ajouter_pannier">Ajouter au pannier</a>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        
+
+    </div>
+
+
+</body>
+</html>

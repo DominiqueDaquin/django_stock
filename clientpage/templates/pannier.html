@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannier</title>
+
+    <style>
+
+        *{
+            margin: 0;
+        }
+       table{
+        border: 1px solid black;
+        padding: 10px;
+       }
+       body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: sans-serif;
+        background: black;
+        color: white;
+       }
+       td{
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+       }
+       caption{
+        position: relative;
+        left:0;
+       }
+       a{
+        text-decoration: none;
+        color:white;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+
+    }
+    a div{
+        height: 2px;
+        width: 0%;
+        background:#fff;
+    }
+    a:hover div{
+        
+        width: 100%;
+        
+    }
+    a:hover{
+        color:aqua;
+    }
+    .btn{
+        border: 1px solid white;
+        padding: 10px;
+    }
+  
+    td{
+        border: 1px solid white;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+    
+    <form  method="post" action="{% url 'clientpage:acheter' %}">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <td>
+                    Article
+                </td>
+                <td>
+                    Prix unitaire
+                </td>
+                <td>
+                    Quantite
+                </td>
+                <td>
+                    Total a payer
+                </td>
+                
+            </thead>
+            <tbody>
+                
+                
+                {% for item in pannierclient %}
+                
+                   <tr>
+                    <td>
+                       <input type="checkbox" name="ligne" id="{{item.id}}" value="{{item.id}}"> {{ item.articleid.nom}}
+                    </td>
+                    <td>
+                        {{ item.articleid.prix}}
+                    </td>
+                    <td>
+                        {{ item.quantite }}
+                    </td>
+                    <td>
+                        {{ item.articleid.prix}} * {{ item.quantite }}
+                    </td>
+                    
+                    <td>
+                        <a href="{% url 'clientpage:supprimer_pannier' item.id %}">
+                            Supprimer
+            {% load static %}
+            <img src="{% static 'images/svg/trash-solid.svg' %}" alt="poubelle" width="10px"/>
+                            </a>
+                        </td>
+                    </tr>
+        
+                    {% empty %}
+                    Aucun article dans le Pannier
+                    {% endfor %}
+                        
+                        
+        
+                </tbody>
+                <input type="checkbox" name="telecharger" id="telecharger" value="telecharger"> telecharger la facture <br>
+        </table>
+        
+    <input type="submit" value="Acheter">    
+    </form>
+   
+</body>
+</html>

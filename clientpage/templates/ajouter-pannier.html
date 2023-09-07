@@ -1,0 +1,54 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter au pannier</title>
+    <style>
+        body{
+            background: black;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        input[type='submit']{
+            background: white;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            color: black;
+            border: none;
+            font-weight: bold;
+            cursor: grab;
+            width: 100%;
+            transition: all .5s linear;
+        }
+        input[type='submit']:hover{
+            background: aqua;
+        }
+        span{
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="article">
+        <img src={{article.photo.url}} alt='{{article.nom}}' width="500px"> <br>
+        {{article.nom |capfirst }}
+        <span>{{article.quantite}}Exemplaires </span>
+    </div>
+    <form method="post" width="500px">
+    
+        {% csrf_token %}
+        {{form.as_p}}
+    <input type="submit" value="Ajouter">
+    </form>
+    
+</body>
+</html>

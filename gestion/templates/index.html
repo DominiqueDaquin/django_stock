@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    
+    <style>
+
+        *{
+            margin: 0;
+        }
+       table{
+        border: 1px solid black;
+        padding: 10px;
+       }
+       body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: sans-serif;
+        background: black;
+        color: white;
+       }
+       td{
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+       }
+       caption{
+        position: relative;
+        left:0;
+       }
+       a{
+        text-decoration: none;
+        color:white;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+
+    }
+    a div{
+        height: 2px;
+        width: 0%;
+        background:#fff;
+    }
+    a:hover div{
+        
+        width: 100%;
+        
+    }
+    a:hover{
+        color:aqua;
+    }
+    .btn{
+        border: 1px solid white;
+        padding: 10px;
+    }
+  
+    
+    </style>
+    
+</head>
+<body>
+    <a href=" {% url 'ajouter' %} "> Ajouter 
+        {% load static %}
+        <img src="{% static 'images/svg/plus-solid.svg' %}" alt="Ajouter" width="10px" style="background-color: white;" />    
+    </a>
+
+<table>
+    <caption><h1>Administrer votre stock par ici !</h1></caption>
+    <thead>
+        <td>
+            images
+        </td>
+        <td>
+            Noms 
+        </td>
+        <td>
+            prix
+        </td>
+        <td>
+            quantite
+        </td>
+     
+    </thead>
+
+    <tbody>
+
+        {% for art in articles  %}
+        <tr>
+            <td>
+                <img src="{{art.photo.name}}" width='50px' height="50px"  alt="imageprofil" >
+            </td>
+            <td>
+            {{art.nom}}
+            </td>
+            <td>
+                {{art.prix}} fcfa
+
+            </td>
+            <td>
+                {{art.quantite}}
+            </td>
+            <td class="btn">
+                <a href=" {% url 'afficher' art.id %} ">Afficher</a>
+            </td>
+
+            <td class="btn">
+                <a href="{% url 'modifier' art.id %}">Modifier
+                    {% load static %}
+<img src="{% static 'images/svg/pen-solid.svg' %}" alt="poubelle" width="10px" style="background-color: white;"/>
+                    <div>
+
+                    </div>
+                </a>
+            </td>
+            <td class="btn">
+                <a href="{% url 'suprimer' art.id %} ">Supprimer
+                    {% load static %}
+                    <img src="{% static 'images/svg/trash-solid.svg' %}" alt="poubelle" width="10px" style="background-color: white;"/>
+                <div></div>
+                </a>
+                    
+            </td>
+        </tr>
+
+
+        {% empty %}
+        Aucun article en stock
+        {% endfor %}
+        
+
+
+   
+    
+    </tbody>
+
+</table>
+
+    
+
+</body>
+</html>    
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afficher</title>
+    <style>
+        body{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .item{
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+           
+        }
+        span{
+            text-decoration: underline;
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="item">
+        <div>
+            <img src="{{article.photo.url}}" width="350px"  alt="photo Article">
+        </div>
+        <div>
+            <p> <span> Nom du produit:</span> {{article.nom}} </p>
+            <p><span>Quantite du stock:</span> {{article.quantite}}  </p>
+            <p><span>Prix de l'unite :</span> {{article.prix}} fcfa</p>
+        </div>
+    
+    
+    </div>
+</body>
+</html>
